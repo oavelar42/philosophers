@@ -6,19 +6,21 @@
 #    By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/21 11:12:25 by oavelar           #+#    #+#              #
-#    Updated: 2021/06/21 11:32:29 by oavelar          ###   ########.fr        #
+#    Updated: 2021/06/21 18:02:17 by oavelar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	= philo_one
 
-CC 		= gcc -g
+CC 		= gcc 
 
-FLAGS	= -Wall - Wextra -Werror
+FLAGS	= -Wall -Wextra -Werror
 
-SRC_ONE	= philo_one
+SRC_ONE	= philo/
 
-SRCS 	= main.c \
+SRCS 	= 	main.c \
+			utils.c \
+			parse.c
 
 SRC		= $(addprefix $(SRC_ONE), $(SRCS))
 
@@ -35,10 +37,11 @@ $(NAME)	: $(OBJ)
 	@echo "$(GREEN)Philo done...$(COLOR_OFF)"
 
 clean	:
-	rm -rf $(OBJ)
+	make clean -C $(OBJ)
 
 fclean	: clean
 	rm -rf $(NAME)
+	@echo "\033[0;31m ---- all cleared! ---- \033[0m"
 
 re		: fclean all
 
