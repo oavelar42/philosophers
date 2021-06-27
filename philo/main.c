@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:34:35 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/21 17:51:40 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/27 19:14:53 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int main(int ac, char **av)
 {
     t_philo             *init;
-    //pthread_t           *pth;
-    //pthread_mutex_t     *mute;
+    pthread_t           *pth;
+    pthread_mutex_t     *mute;
 
-    //pth = NULL;
-    //mute = NULL;
+    pth = NULL;
+    mute = NULL;
     //g_stop = false;
     //g_meals = 0;
     if (ac < 5 || ac > 6)
@@ -28,5 +28,9 @@ int main(int ac, char **av)
         return (printf("ERROR...philosophers alone.\n"));
     if (!parse_init(&init, ac, av))
         return (printf("ERROR...incorrect information.\n"));
+    if (!init_mutex(init, &mute))
+        return (printf("Error : No init mutex!\n"));
+    if (!init_thread(init, &pth, &mute))
+        return (printf("Error : No init thread!\n"));
     return (0);
 }

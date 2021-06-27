@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:58:13 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/21 17:45:57 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/27 19:14:54 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int parse_init(t_philo **input, int ac, char **av)
     in = *input;
     in = (t_philo *)malloc(sizeof(t_philo) * ft_my_atoi(av[1]));
     if (!in)
-        return (printf("ERROR...memory error\n"));
+        return (printf("Error...memory error\n"));
     b = 0;
     while (b < ft_my_atoi(av[1]))
     {
@@ -47,7 +47,7 @@ int parse_init(t_philo **input, int ac, char **av)
         if (in[b]. number_of_philo <= 0 || in[b].time_to_die <= 0
             || in[b].time_to_eat <= 0 || in[b].time_to_sleep <= 0
             || (in[b].end_eat && in[b].end_eat_amount <= 0))
-            return (printf("ERROR...input value.\n"));
+            return (printf("Error...input value.\n"));
         b++;
     }
     *input = in;

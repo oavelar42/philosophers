@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:50:11 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/21 17:51:54 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/27 19:10:47 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,6 @@ long long       get_time(void);
 
 int             parse_init(t_philo **input, int ac, char **av);
 
+int 			init_thread(t_philo *in, pthread_t **ph2, pthread_mutex_t **mutx2);
+int 			init_mutex(t_philo *in, pthread_mutex_t **mutx2);
 #endif
