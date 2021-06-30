@@ -6,52 +6,50 @@
 #    By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/21 11:12:25 by oavelar           #+#    #+#              #
-#    Updated: 2021/06/27 19:16:57 by oavelar          ###   ########.fr        #
+#    Updated: 2021/06/30 21:49:37 by oavelar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 	= philo
+CC			= clang -Wall -Wextra -Werror -pthread -fsanitize=address
+RM			= rm -rf
+NAME		= ./philo
+NAME_SHORT	= philo
 
-CC 		= gcc 
+INCS_DIR	= includes
+MAIN_INC	= -I$(INCS_DIR)
+INCS		= $(shell find $(INCS_DIR) -type f -name "*.h")
 
-FLAGS	= -Wall -Wextra -Werror -fsanitize=address
+SRCS_DIR 	= srcs
+SRCS		= $(shell find $(SRCS_DIR) -type f -name "*.c")
 
-INCLUDE = -I ./includes/
+OBJS		= $(SRCS:.c=.o)
 
-SRC_ONE	= philo/
+_COLOR		= \033[32m
+_BOLDCOLOR	= \033[32;1m
+_RESET		= \033[0m
+_CLEAR		= \033[0K\r\c
+_OK			= [\033[32mOK\033[0m]
 
-SRCS 	= 	main.c \
-			utils.c \
-			parse.c \
-			init.c
+%.o			: %.c
+			@echo "[..] $(NAME_SHORT)... compiling $*.c\r\c"
+			@$(CC) $(MAIN_INC) -c $< -o $@
+			@echo "$(_CLEAR)"
 
-OBJ		=	$(SRCS:.c=.o)
+all			: $(NAME)
 
-%.o : %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(NAME)		: $(OBJS) $(OBJS_UTILS) $(INCS)
+			@$(CC) $(OBJS) $(MAIN_INC) -o $(NAME)
+			@echo "$(_OK) $(NAME_SHORT) compiled"
 
-GREEN		= \033[1;32m
-BLUE		= \033[0;34m
-RED		= \033[1;31m
-COLOR_OFF	= \033[0m
+clean		:
+			@$(RM) $(OBJS)
 
-$(NAME)	: $(OBJ)
-	@echo "$(BLUE)Init Philosophers$(COLOR_OFF)"
-	$(CC) $(FLAGS) $(INCLUDES) $(OBJ) -l pthread -o $(NAME)
-	@echo "$(GREEN)Philo done...$(COLOR_OFF)"
+fclean		: clean
+			@$(RM) $(NAME)
 
-all		: $(NAME)
+re			: fclean all
 
-clean	:
-	@make clean $(OBJ)
-	@rm -f $(OBJ)
-	@echo "$(RED)...Objects removed...$(COLOR_OFF)"
+norme		:
+			@norminette $(SRCS) $(INCS)
 
-fclean	: clean
-	@make fclean $(OBJ) 
-	@rm -rf $(NAME)
-	@echo "$(RED)....All cleared....$(COLOR_OFF)"
-
-re		: fclean all
-
-.PHONY	: all clean fclean re 
+.PHONY		: all clean fclean re norme
