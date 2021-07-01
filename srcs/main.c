@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:34:35 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/01 15:15:51 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/01 16:18:49 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	philo(t_data *global)
 	while (++count < global->num_of_philos)
 	{
 		pthread_create(&(global->thread_id)[count],
-		NULL, pthread_routine, &philo[count]);
+		NULL, routine_philo, &philo[count]);
 		pthread_detach(global->thread_id[count]);
 	}
 	while (1)

@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:50:11 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/01 16:00:36 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/01 16:17:50 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ int			philo(t_data *global);
 long long	ft_my_atoi(const char *s);
 long long	get_time(void);
 void		sleep_time(long long delay);
+void   		*routine_philo(void *p);
 
 #endif
