@@ -6,13 +6,15 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:49:41 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/30 21:17:37 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/01 16:05:11 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void    *ft_philo(void *phi)
+// SEGMENTTAKOPGJOPSGPOSGRK MERDA
+
+/*void    *ft_philo(void *phi)
 {
     t_philo     *p;
     pthread_t    main;
@@ -27,7 +29,9 @@ void    *ft_philo(void *phi)
     while (p->live && (!p->end_eat || count < p->end_eat_amount))
     {
         philo_fork(p);
+        philo_eat(p);
         philo_sleep(p);
+        philo_think(p);
         count++;
     }
     p->live = false;
@@ -63,6 +67,17 @@ void    ft_check_meals(t_philo *in, pthread_t **ph2)
     }
 }
 
+void    ft_check_die(t_philo *in, pthread_t **ph2)
+{
+    int end;
+
+    end = in[0].number_of_philo;
+    while (!in->data->stop)
+        sleep_time(1);
+    if (in->data->stop)
+        delete_philo(end, ph2);
+}
+
 int init_process(t_philo *in, pthread_t **ph2)
 {
     int index;
@@ -75,8 +90,8 @@ int init_process(t_philo *in, pthread_t **ph2)
     }
     if (in->end_eat)
         ft_check_meals(in, ph2);
-    /*else
-        ft_check_die(in, ph2);*/
+    else
+        ft_check_die(in, ph2);
     return (1);
 }
-
+*/

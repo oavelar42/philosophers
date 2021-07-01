@@ -6,50 +6,61 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:58:13 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/30 16:23:27 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/01 15:53:37 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	parse_init2(t_philo **input, int b, int *a, char **av)
+void	init_global(t_data *global)
 {
-	(*input)[b].number_of_philo = ft_my_atoi(av[(*a)++]);
-	(*input)[b].time_to_die = ft_my_atoi(av[(*a)++]);
-	(*input)[b].time_to_eat = ft_my_atoi(av[(*a)++]);
-	(*input)[b].time_to_sleep = ft_my_atoi(av[(*a)++]);
-	(*input)[b].live = true;
-	(*input)[b].last_eat_time = get_time();
-	(*input)[b].meals = 0;
-	(*input)[b].time = get_time();
+	int	count;
+
+	global->base_time = get_time();
+	global->cur_time = 0;
+	global->monitor_flag = 0;
+	global->mutex_id = malloc(sizeof(pthread_mutex_t) * global->num_of_philos);
+	count = -1;
+	while (++count < global->num_of_philos)
+		pthread_mutex_init(&(global->mutex_id)[count], NULL);
+	pthread_mutex_init(&global->mutex_print, NULL);
+	global->fork = malloc(sizeof(pthread_t) * global->num_of_philos);
+	memset(global->fork, -1, global->num_of_philos);
+	global->thread_id = malloc(sizeof(pthread_t) * global->num_of_philos);
 }
 
-int	parse_init(t_philo **input, int ac, char **av)
+void	init_philo(t_data *global, t_philo **philo)
 {
-	int		a;
-	int		b;
-	t_philo	*in;
+	int count;
 
-	in = *input;
-	in = (t_philo *)malloc(sizeof(t_philo) * ft_my_atoi(av[1]));
-	if (!in)
-		return (printf("Error...memory error\n"));
-	b = 0;
-	while (b < ft_my_atoi(av[1]))
+	count = -1;
+	*philo = malloc(sizeof(t_philo) * global->num_of_philos);
+	while (++count < global->num_of_philos)
 	{
-		a = 1;
-		parse_init2(&in, b, &a, av);
-		if (av[b] && a < ac)
-		{
-			in[b].end_eat = true;
-			in[b].end_eat_amount = ft_my_atoi(av[a++]);
-		}
-		if (in[b]. number_of_philo <= 0 || in[b].time_to_die <= 0
-			|| in[b].time_to_eat <= 0 || in[b].time_to_sleep <= 0
-			|| (in[b].end_eat && in[b].end_eat_amount <= 0))
-			return (printf("Error...input value.\n"));
-		b++;
+		(*philo)[count].number = count;
+		(*philo)[count].state = 0;
+		(*philo)[count].old_state = 0;
+		(*philo)[count].last_eat = get_time();
+		(*philo)[count].eat_cnt = 0;
+		if (count == 0)
+			(*philo)[count].left_fork = global->num_of_philos - 1;
+		else
+			(*philo)[count].left_fork = count - 1;
+		(*philo)[count].right_fork = count;
+		(*philo)[count].data = global;
 	}
-	*input = in;
-	return (1);
+}
+
+void	mutex_destroy(t_data *global)
+{
+	int	count;
+
+	count = -1;
+	while (++count < global->num_of_philos)
+	{
+		usleep(10);
+		pthread_mutex_destroy(&(global->mutex_id)[count]);
+	}
+	usleep(10);
+	pthread_mutex_destroy(&global->mutex_print);
 }

@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:25:27 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/30 20:44:43 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/01 15:59:16 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,5 @@ void	sleep_time(long long delay)
 
 	end = get_time() + delay;
 	while (end > get_time())
-		usleep(10);
+		usleep(100);
 }

@@ -6,13 +6,13 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:36:31 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/30 21:36:39 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/01 16:04:37 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_thread(t_philo *in, pthread_t **ph2, pthread_mutex_t **mutx2)
+/*int	init_thread(t_philo *in, pthread_t **ph2, pthread_mutex_t **mutx2)
 {
 	int			index;
 	pthread_t	*ph;
@@ -73,4 +73,4 @@ void		clear_program(t_philo **in, pthread_mutex_t **mu2,
 	free((*ph2));
 	pthread_mutex_destroy((*in)->mutex_monitor);
 	free((*in));
-}
+}*/

@@ -6,11 +6,11 @@
 #    By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/21 11:12:25 by oavelar           #+#    #+#              #
-#    Updated: 2021/06/30 21:49:37 by oavelar          ###   ########.fr        #
+#    Updated: 2021/07/01 10:59:35 by oavelar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC			= clang -Wall -Wextra -Werror -pthread -fsanitize=address
+CC			= clang -Wall -Wextra -Werror -pthread #-fsanitize=address
 RM			= rm -rf
 NAME		= ./philo
 NAME_SHORT	= philo
