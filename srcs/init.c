@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:36:31 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/03 20:09:02 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/03 21:15:04 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	time_die_monitor(t_philo *p, t_data *global)
 		if (time >= global->time_to_die)
 		{
 			global->monitor_flag = 1;
-			printf(RED"[%.4li]\t"BLU"Philosopher "GRE"%i "RED, p->data, get_time()
+			printf(RED"[%lld]_in_ms %d is died\n", get_time()
         		- p->data->base_time, p->number);
-			printf("is "YEL"died"GRE"!\n");
+			//printf("is "YEL"died"GRE"!\n");
 			return (1);
 		}
 		if (p[index].eat_cnt == global->time_must_eat)
