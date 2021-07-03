@@ -6,11 +6,27 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:49:41 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/01 16:05:11 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/03 19:40:16 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void    take_fork(t_philo *p, int left, int right, int p_num)
+{
+    pthread_mutex_lock(&p->data->mutex_id[left]);
+    pthread_mutex_lock(&p->data->mutex_id[right]);
+    p->data->fork[left] = p_num;
+    p->data->fork[right] = p_num;
+}
+
+void	other_fork(t_philo *p, int right_f, int left_f)
+{
+	p->data->fork[right_f] = -1;
+	p->data->fork[left_f] = -1;
+	pthread_mutex_unlock(&p->data->mutex_id[right_f]);
+	pthread_mutex_unlock(&p->data->mutex_id[left_f]);
+}
 
 // SEGMENTTAKOPGJOPSGPOSGRK MERDA
 

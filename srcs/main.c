@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:34:35 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/01 16:18:49 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/03 20:28:49 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,11 @@ int	philo(t_data *global)
 		if (time_die_monitor(philo, global))
 			break ;
 	}
-	mutex_detroy(global);
+	mutex_destroy(global);
 	return (0);
 }
 
-void	init_data(t_data global, char *av[])
-{
-	global.num_of_philos = ft_my_atoi(av[1]);
-	global.time_to_die = ft_my_atoi(av[2]);
-	global.time_to_eat = ft_my_atoi(av[3]);
-	global.time_to_sleep = ft_my_atoi(av[3]);
-	global.time_must_eat = 0;
-	global.time_must_eat_flag = 0;
-}
-
-int main(int ac, char **av)
+int main(int ac, char *av[])
 {
 	t_data global;
 
@@ -55,7 +45,12 @@ int main(int ac, char **av)
 		printf(RED"Error, wrong arguments!\n");
 	else
 	{
-		init_data(global, av);
+		global.num_of_philos = ft_my_atoi(av[1]);
+		global.time_to_die = ft_my_atoi(av[2]);
+		global.time_to_eat = ft_my_atoi(av[3]);
+		global.time_to_sleep = ft_my_atoi(av[3]);
+		global.time_must_eat = 0;
+		global.time_must_eat_flag = 0;
 		if (ac == 6)
 			global.time_must_eat = ft_my_atoi(av[5]);
 		philo(&global);

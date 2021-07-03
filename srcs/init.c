@@ -6,71 +6,54 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:36:31 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/01 16:04:37 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/03 20:09:02 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/*int	init_thread(t_philo *in, pthread_t **ph2, pthread_mutex_t **mutx2)
+int	time_eat_monitor(t_philo *p, t_data *global)
 {
 	int			index;
-	pthread_t	*ph;
 
-	ph = *ph2;
-	ph = (pthread_t *)malloc(sizeof(pthread_t) * in[0].number_of_philo);
-	if (!ph)
-		return (printf("Error : Thread malloc error!\n"));
-	index = 0;
-	while (index < in[index].number_of_philo)
+	if (global->time_must_eat
+		&& global->time_must_eat_flag == global->num_of_philos)
+		return (1);
+	index = -1;
+	while (++index < global->num_of_philos)
 	{
-		in[index].id = index;
-		in[index].mutex_left = &(*mutx2)[index];
-		if (index + 1 == in[index].number_of_philo)
-			in[index].mutex_right = &(*mutx2)[0];
-		else
-			in[index].mutex_right = &(*mutx2)[index + 1];
-		index++;
+		if (p[index].eat_cnt == global->time_must_eat)
+		{
+			global->time_must_eat_flag++;
+			p[index].eat_cnt++;
+		}
 	}
-	*ph2 = ph;
-	return (1);
+	return (0);
 }
 
-int	init_mutex(t_philo *in, pthread_mutex_t **mutx2)
+int	time_die_monitor(t_philo *p, t_data *global)
 {
-	int				index;
-	pthread_mutex_t	*pth;
+	int		index;
+	int		time;
 
-	(*mutx2 = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t)
-		* in[0].number_of_philo));
-	if (!mutx2)
-		return (printf("Error : Mutex error!\n"));
-	pth = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	if (!pth)
-		return (printf("Error : Pth error"));
-	index = 0;
-	pthread_mutex_init(pth, NULL);
-	while (index < in[0].number_of_philo)
+	index = -1;
+	time = 0;
+	while (++index < global->num_of_philos)
 	{
-		pthread_mutex_init(&(*mutx2)[index], NULL);
-		in[index].mutex_monitor = pth;
-		index++;
+		time = get_time() - p[index].last_eat;
+		if (time >= global->time_to_die)
+		{
+			global->monitor_flag = 1;
+			printf(RED"[%.4li]\t"BLU"Philosopher "GRE"%i "RED, p->data, get_time()
+        		- p->data->base_time, p->number);
+			printf("is "YEL"died"GRE"!\n");
+			return (1);
+		}
+		if (p[index].eat_cnt == global->time_must_eat)
+		{
+			global->time_must_eat_flag++;
+			p[index].eat_cnt++;
+		}
 	}
-	return (1);
+	return (0);
 }
-
-void		clear_program(t_philo **in, pthread_mutex_t **mu2,
-		pthread_t **ph2)
-{
-	int					index;
-	int					end;
-
-	index = 0;
-	end = (*in)[index].number_of_philo;
-	while (index < end)
-		pthread_mutex_destroy(&(*mu2)[index++]);
-	free((*mu2));
-	free((*ph2));
-	pthread_mutex_destroy((*in)->mutex_monitor);
-	free((*in));
-}*/

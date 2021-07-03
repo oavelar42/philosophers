@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:50:11 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/01 16:17:50 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/03 20:29:10 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 # define YEL "\x1B[33m"
 # define BLU "\x1B[34m"
 
-# include <stdio.h>
+# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <pthread.h>
 # include <sys/time.h>
-# include <limits.h>
+# include <pthread.h>
+# include <stdio.h>
 
 typedef struct s_data
 {
@@ -56,9 +56,17 @@ typedef struct s_philo
 }           t_philo;
 
 int			philo(t_data *global);
+void	init_philo(t_data *global, t_philo **philo);
+void	init_global(t_data *global);
 long long	ft_my_atoi(const char *s);
 long long	get_time(void);
 void		sleep_time(long long delay);
+long long	get_time(void);
 void   		*routine_philo(void *p);
+void		other_fork(t_philo *p, int right_f, int left_f);
+void   		take_fork(t_philo *p, int left, int right, int p_num);
+int			time_die_monitor(t_philo *p, t_data *global);
+int			time_eat_monitor(t_philo *p, t_data *global);
+void		mutex_destroy(t_data *global);
 
 #endif
