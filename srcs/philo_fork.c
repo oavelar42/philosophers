@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   philo_fork.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:49:41 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/03 19:40:16 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/07 19:33:20 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void    take_fork(t_philo *p, int left, int right, int p_num)
 {
-    pthread_mutex_lock(&p->data->mutex_id[left]);
-    pthread_mutex_lock(&p->data->mutex_id[right]);
+    if (p_num % 2)
+        pthread_mutex_lock(&p->data->mutex_id[left]);
+    else
+        pthread_mutex_lock(&p->data->mutex_id[right]);
     p->data->fork[left] = p_num;
     p->data->fork[right] = p_num;
 }

@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:50:11 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/03 20:29:10 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/07 19:05:49 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define GRE "\x1B[32m"
 # define YEL "\x1B[33m"
 # define BLU "\x1B[34m"
+# define MAG "\x1B[35m"
 
 # include <string.h>
 # include <stdlib.h>
