@@ -6,11 +6,34 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:49:41 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/07 19:33:20 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/13 13:23:44 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+/*void	print_state(t_philo *p, int time, int num)
+{
+    (void)num;
+	if (p->data->monitor_flag && (time = 1))
+       	printf(RED"[%lld] Philosopher's %d died\n", get_time()
+        		- p->data->base_time, p->number + 1);
+		//print_time_num(p, time, number + 1, "died\n");
+	else if (!p->data->monitor_flag && (time = 1))// && state == TAKE)
+        printf(MAG"[%lld] Philosopher's %d has taken a fork\n", get_time() - p->data->base_time, p->number + 1);
+		//print_time_num(global, time, number + 1, "has taken a fork\n");
+	else if (!p->data->monitor_flag && (time = 1))// && state == EAT)
+       printf(YEL"[%lld] Philosopher's %d is eating\n", get_time() - p->data->base_time, p->number + 1);
+        //print_time_num(p, time, number + 1, "is eating\n");
+	else if (!p->data->monitor_flag && (time = 1)) //&& state == SLEEP)
+		printf(GRE"[%lld] Philosopher's %d is sleeping\n", get_time()
+        - p->data->base_time, p->number + 1);
+        //print_time_num(p, time, number + 1, "is sleeping\n");
+	else if (!p->data->monitor_flag && (time = 1)) //&& state == THINK)
+		printf(BLU"[%lld] Philosopher's %d is thinking\n", get_time()
+        - p->data->base_time, p->number + 1);
+        //print_time_num(p, time, number + 1, "is thinking\n");
+}*/
 
 void    take_fork(t_philo *p, int left, int right, int p_num)
 {
@@ -20,6 +43,9 @@ void    take_fork(t_philo *p, int left, int right, int p_num)
         pthread_mutex_lock(&p->data->mutex_id[right]);
     p->data->fork[left] = p_num;
     p->data->fork[right] = p_num;
+    //print_state(p, get_time() - p->data->base_time, p->number);
+    //if (p->data && !p->number)
+    printf(MAG"[%lld] Philosopher's %d has taken a fork\n", get_time() - p->data->base_time, p->number + 1);
 }
 
 void	other_fork(t_philo *p, int right_f, int left_f)
@@ -29,7 +55,6 @@ void	other_fork(t_philo *p, int right_f, int left_f)
 	pthread_mutex_unlock(&p->data->mutex_id[right_f]);
 	pthread_mutex_unlock(&p->data->mutex_id[left_f]);
 }
-
 // SEGMENTTAKOPGJOPSGPOSGRK MERDA
 
 /*void    *ft_philo(void *phi)

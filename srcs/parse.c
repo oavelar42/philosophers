@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:58:13 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/03 20:29:29 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/12 23:19:48 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	init_philo(t_data *global, t_philo **philo)
 	while (++count < global->num_of_philos)
 	{
 		(*philo)[count].number = count;
-		(*philo)[count].state = 0;
 		(*philo)[count].old_state = 0;
 		(*philo)[count].last_eat = get_time();
 		(*philo)[count].eat_cnt = 0;

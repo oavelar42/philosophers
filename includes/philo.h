@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:50:11 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/07 19:05:49 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/13 13:10:27 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_philo
 	int				left_fork;
 	int				right_fork;
 	int				old_state;
-	int				state;
 	long			last_eat;
 	int				eat_cnt;
 	t_data			*data;
@@ -69,5 +68,6 @@ void   		take_fork(t_philo *p, int left, int right, int p_num);
 int			time_die_monitor(t_philo *p, t_data *global);
 int			time_eat_monitor(t_philo *p, t_data *global);
 void		mutex_destroy(t_data *global);
+//void	print_state(t_philo *p, int time, int num);
 
 #endif
