@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:50:11 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/13 13:10:27 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/16 14:53:40 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,19 @@ typedef struct s_philo
 	long			last_eat;
 	int				eat_cnt;
 	t_data			*data;
-}           t_philo;
+}		t_philo;
 
-int			philo(t_data *global);
+int		philo(t_data *global);
 void	init_philo(t_data *global, t_philo **philo);
 void	init_global(t_data *global);
 long long	ft_my_atoi(const char *s);
-long long	get_time(void);
-void		sleep_time(long long delay);
-long long	get_time(void);
-void   		*routine_philo(void *p);
-void		other_fork(t_philo *p, int right_f, int left_f);
-void   		take_fork(t_philo *p, int left, int right, int p_num);
-int			time_die_monitor(t_philo *p, t_data *global);
-int			time_eat_monitor(t_philo *p, t_data *global);
-void		mutex_destroy(t_data *global);
-//void	print_state(t_philo *p, int time, int num);
+void	sleep_time(long long delay);
+long long		get_time(void);
+void	*routine_philo(void *p);
+void	other_fork(t_philo *p, int right_f, int left_f);
+void	take_fork(t_philo *p, int left, int right, int p_num);
+int		time_die_monitor(t_philo *p, t_data *global);
+int		time_eat_monitor(t_philo *p, t_data *global);
+void	mutex_destroy(t_data *global);
 
 #endif

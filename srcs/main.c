@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:34:35 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/16 14:50:43 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/16 14:52:49 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	philo(t_data *global)
 	while (++count < global->num_of_philos)
 	{
 		pthread_create(&(global->thread_id)[count],
-		NULL, routine_philo, &philo[count]);
+			NULL, routine_philo, &philo[count]);
 		pthread_detach(global->thread_id[count]);
 	}
 	while (1)
@@ -37,9 +37,9 @@ int	philo(t_data *global)
 	return (0);
 }
 
-int main(int ac, char *av[])
+int	main(int ac, char *av[])
 {
-	t_data global;
+	t_data	global;
 
 	if (ac != 5 && ac != 6)
 		printf(RED"Error, wrong arguments!\n");

@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:25:27 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/16 14:50:48 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/16 14:53:19 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ long long	ft_my_atoi(const char *s)
 
 long long	get_time(void)
 {
-	struct timeval time;
+	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000L + time.tv_usec / 1000L));    
+	return ((time.tv_sec * 1000L + time.tv_usec / 1000L));
 }
 
 void	sleep_time(long long delay)
 {
-	long long end;
+	long long	end;
 
 	end = get_time() + delay;
 	while (end > get_time())

@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:36:31 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/13 13:10:19 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/16 14:52:40 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ int	time_die_monitor(t_philo *p, t_data *global)
 		if (time >= global->time_to_die)
 		{
 			global->monitor_flag = 1;
-			//print_state(p, get_time() - p->data->base_time, p->number);
 			printf(RED"[%lld] Philosopher's %d died\n", get_time()
-        		- p->data->base_time, p->number);
+				- p->data->base_time, p->number);
 			return (1);
 		}
 		if (p[index].eat_cnt == global->time_must_eat)

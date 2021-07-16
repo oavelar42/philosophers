@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:58:13 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/16 14:50:46 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/16 14:52:59 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_global(t_data *global)
 
 void	init_philo(t_data *global, t_philo **philo)
 {
-	int count;
+	int	count;
 
 	count = -1;
 	*philo = malloc(sizeof(t_philo) * global->num_of_philos);
