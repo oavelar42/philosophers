@@ -28,7 +28,7 @@ philosopher must eat with two forks, one for each hand.
 
   <h4> For example :</h4>
 
-  `./philo "2 800 200 200"`
+  `./philo 2 800 200 200`
 
 
 <h2>WORK IN PROGRESS</h2>
