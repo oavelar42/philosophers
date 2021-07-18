@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:50:11 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/16 14:53:40 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/18 12:37:06 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,9 @@ typedef struct s_data
 	int				time_must_eat_flag;
 	int				*fork;
 	long			base_time;
-	long			cur_time;
 	int				monitor_flag;
 	pthread_t		*thread_id;
-	pthread_t		tid_print;
 	pthread_mutex_t	*mutex_id;
-	pthread_mutex_t	mutex_print;
 }				t_data;
 
 typedef struct s_philo
@@ -49,7 +46,6 @@ typedef struct s_philo
 	int				number;
 	int				left_fork;
 	int				right_fork;
-	int				old_state;
 	long			last_eat;
 	int				eat_cnt;
 	t_data			*data;
@@ -58,9 +54,9 @@ typedef struct s_philo
 int		philo(t_data *global);
 void	init_philo(t_data *global, t_philo **philo);
 void	init_global(t_data *global);
-long long	ft_my_atoi(const char *s);
+int		ft_my_atoi(const char *str);
 void	sleep_time(long long delay);
-long long		get_time(void);
+long	get_time(void);
 void	*routine_philo(void *p);
 void	other_fork(t_philo *p, int right_f, int left_f);
 void	take_fork(t_philo *p, int left, int right, int p_num);

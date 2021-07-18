@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:25:27 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/16 14:53:19 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/18 12:09:09 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,30 @@ int	ft_isspace(char c)
 	return (0);
 }
 
-long long	ft_my_atoi(const char *s)
+int	ft_my_atoi(const char *str)
 {
+	int	holder;
+	int	sign;
+
+	holder = 0;
+	sign = 1;
+	while ((*str >= 9 && *str <= 13) || *str == ' ')
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sign *= -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		holder = holder * 10 + *str - '0';
+		str++;
+	}
+	return (holder * sign);
+}
+
+/*{
 	long long	res;
 	long long	check;
 	int			sign;
@@ -47,21 +69,21 @@ long long	ft_my_atoi(const char *s)
 		s++;
 	}
 	return (res * sign);
-}
+}*/
 
-long long	get_time(void)
+long	get_time(void)
 {
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000L + time.tv_usec / 1000L));
+	return ((time.tv_sec * 1000 + time.tv_usec / 1000));
 }
 
 void	sleep_time(long long delay)
 {
 	long long	end;
 
-	end = get_time() + delay;
+	end = delay + get_time();
 	while (end > get_time())
 		usleep(100);
 }

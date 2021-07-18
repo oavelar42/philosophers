@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:58:13 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/16 14:52:59 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/18 12:27:25 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@ void	init_global(t_data *global)
 	int	count;
 
 	global->base_time = get_time();
-	global->cur_time = 0;
 	global->monitor_flag = 0;
 	global->mutex_id = malloc(sizeof(pthread_mutex_t) * global->num_of_philos);
 	count = -1;
 	while (++count < global->num_of_philos)
 		pthread_mutex_init(&(global->mutex_id)[count], NULL);
-	pthread_mutex_init(&global->mutex_print, NULL);
-	global->fork = malloc(sizeof(pthread_t) * global->num_of_philos);
+	global->fork = malloc(sizeof(int) * global->num_of_philos);
 	memset(global->fork, -1, global->num_of_philos);
 	global->thread_id = malloc(sizeof(pthread_t) * global->num_of_philos);
 }
@@ -38,7 +36,6 @@ void	init_philo(t_data *global, t_philo **philo)
 	while (++count < global->num_of_philos)
 	{
 		(*philo)[count].number = count;
-		(*philo)[count].old_state = 0;
 		(*philo)[count].last_eat = get_time();
 		(*philo)[count].eat_cnt = 0;
 		if (count == 0)
@@ -61,5 +58,4 @@ void	mutex_destroy(t_data *global)
 		pthread_mutex_destroy(&(global->mutex_id)[count]);
 	}
 	usleep(10);
-	pthread_mutex_destroy(&global->mutex_print);
 }
