@@ -22,4 +22,13 @@ philosopher must eat with two forks, one for each hand.
   
   - Each time a philosopher has finished eating, he will drop his forks and start sleeping. </h4>
 
+  <h3> To start the program :</h3
+
+  `$ make`
+
+  <h4> For example :</h4>
+
+  `./philo "2 800 200 200"`
+
+
 <h2>WORK IN PROGRESS</h2>
