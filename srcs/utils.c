@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:25:27 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/18 12:09:09 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/20 21:48:59 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,13 @@ int	ft_my_atoi(const char *str)
 	return (res * sign);
 }*/
 
-long	get_time(void)
+unsigned int	get_time(void)
 {
 	struct timeval	time;
 
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000 + time.tv_usec / 1000));
+	if (gettimeofday(&time, NULL));
+		return (0);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 void	sleep_time(long long delay)
@@ -86,4 +87,24 @@ void	sleep_time(long long delay)
 	end = delay + get_time();
 	while (end > get_time())
 		usleep(100);
+}
+
+void	clean_free(t_data *data)
+{
+	size_t	count;
+
+	if (data->philo && data->num_of_philos > 0)
+	{
+		count = 0;
+		while (count < data->num_of_philos)
+		{
+			pthread_mutex_destroy(&(data->fork[count]));
+			count++;
+		}
+		free(data->fork);
+		free(data->philo);
+		pthread_mutex_destroy(&(data->die));
+		pthread_mutex_destroy(&(data->locked));
+		pthread_mutex_destroy(&(data->write));
+	}
 }

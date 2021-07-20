@@ -6,7 +6,7 @@
 #    By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/21 11:12:25 by oavelar           #+#    #+#              #
-#    Updated: 2021/07/18 12:35:42 by oavelar          ###   ########.fr        #
+#    Updated: 2021/07/20 16:53:28 by oavelar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,10 @@ OBJS		= $(SRCS:.c=.o)
 
 _COLOR		= \033[32m
 _BOLDCOLOR	= \033[32;1m
-_RESET		= \033[0m
 _CLEAR		= \033[0K\r\c
 _OK			= [\033[32mOK\033[0m]
-RED			= \033[1;31m
+_RED		= \033[1;31m
+_OFF		= \033[0m
 
 %.o			: %.c
 			@echo "[..] $(NAME_SHORT)... compiling $*.c\r\c"
@@ -44,7 +44,7 @@ $(NAME)		: $(OBJS) $(OBJS_UTILS) $(INCS)
 
 clean		:
 			@$(RM) $(OBJS)
-			@echo "${RED}...Removing object files..."
+			@echo "${_RED}...Removing object files...${_OFF}"
 
 fclean		: clean
 			@$(RM) $(NAME)
