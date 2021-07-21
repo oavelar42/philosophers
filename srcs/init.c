@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:36:31 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/21 14:38:38 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/21 16:20:35 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,27 @@ static char	init_mutex(t_data *data)
 {
 	size_t	count;
 
-	if (pthread_mutex_init(&(data->write), NULL))
-		return (0);
 	if (pthread_mutex_init(&(data->locked), NULL))
 		return (0);
 	if (pthread_mutex_init(&(data->die), NULL))
 		return (0);
-	data->fork = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t) * data->num_of_philos);
-	if (!data->fork)
+	data->forks = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t)
+			* data->num_of_philos);
+	if (!data->forks)
 		return (0);
 	count = 0;
 	while (count < data->num_of_philos)
 	{
-		if (pthread_mutex_init(&(data->fork[count]), NULL))
+		if (pthread_mutex_init(&(data->forks[count]), NULL))
 			return (0);
 		count++;
 	}
 	return (1);
 }
 
-static char init_philo(t_data *p)
+static char	init_philo(t_data *p)
 {
-	size_t count;
+	size_t	count;
 
 	p->philo = (t_philo *) malloc(sizeof(t_philo) * p->num_of_philos);
 	if (!p->philo)
@@ -56,9 +55,9 @@ static char init_philo(t_data *p)
 	return (1);
 }
 
-static char set_arg(size_t *get, char const **av, int count)
+static char	set_arg(size_t *get, char const **av, int count)
 {
-	int len;
+	int	len;
 
 	len = ft_my_atoi(av[count]);
 	if (len <= 0)
@@ -67,7 +66,7 @@ static char set_arg(size_t *get, char const **av, int count)
 	return (1);
 }
 
-static char init_args(t_data *data, char const **av, int ac)
+static char	init_args(t_data *data, char const **av, int ac)
 {
 	if (!set_arg(&(data->num_of_philos), av, 1))
 		return (0);
@@ -83,7 +82,7 @@ static char init_args(t_data *data, char const **av, int ac)
 			return (0);
 	}
 	else
-	data->philo_eat = 0;
+		data->philo_eat = 0;
 	data->init_time = get_time();
 	data->some_died = 0;
 	data->must_eat = 0;

@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:34:35 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/21 14:39:07 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/21 17:30:43 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 static char	philo(t_data *global)
 {
-	size_t count;
+	size_t	count;
 
-	if (pthread_create(&(global->th_death), NULL, &ft_die, (void *)(global)))
+	if (pthread_create(&(global->death), NULL, &ft_die, (void *)(global)))
 		return (0);
-	pthread_detach(global->th_death);
+	pthread_detach(global->death);
 	count = -1;
 	while (++count < global->num_of_philos)
 	{
-		if (pthread_create(&(global->philo[count].thread_id),
+		if (pthread_create(&(global->philo[count].thread),
 				NULL, &routine_philo, (void *)(&(global->philo[count]))))
-		return (0);
+			return (0);
 	}
 	count = -1;
 	while (++count < global->num_of_philos)
-		if (pthread_join(global->philo[count].thread_id, NULL))
+		if (pthread_join(global->philo[count].thread, NULL))
 			return (0);
 	return (1);
 }
@@ -38,16 +38,16 @@ int	main(int ac, char const **av)
 	t_data	global;
 
 	if (ac < 5 || ac > 6)
-		printf(RED"Error, wrong arguments!\n");
+		return (printf(RED"Error, wrong arguments!\n"));
 	if (!init_all(&global, av, ac))
 	{
 		clean_free(&global);
-		printf(RED"We can't start , init error or segmentation!\n");
+		return (printf(RED"We can't start , init error or negative number!\n"));
 	}
 	if (!philo(&global))
 	{
 		clean_free(&global);
-		printf(RED"Error , threads error!\n");
+		return (printf(RED"Error , threads error!\n"));
 	}
 	pthread_mutex_lock(&(global.die));
 	pthread_mutex_unlock(&(global.die));

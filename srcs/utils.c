@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:25:27 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/21 13:50:52 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/21 17:37:01 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,12 @@ void	clean_free(t_data *data)
 		count = 0;
 		while (count < data->num_of_philos)
 		{
-			pthread_mutex_destroy(&(data->fork[count]));
+			pthread_mutex_destroy(&(data->forks[count]));
 			count++;
 		}
-		free(data->fork);
+		free(data->forks);
 		free(data->philo);
 		pthread_mutex_destroy(&(data->die));
 		pthread_mutex_destroy(&(data->locked));
-		pthread_mutex_destroy(&(data->write));
 	}
 }
