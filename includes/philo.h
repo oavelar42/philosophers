@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:50:11 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/21 00:10:30 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/21 11:53:45 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@
 # include <pthread.h>
 # include <stdio.h>
 
+typedef struct s_philo
+{
+	size_t			philo_id; // vulgo number
+	size_t			last_eat;
+	size_t			eat_count;
+	char			must_eat;
+	char			ate;  // vulgo is_eating
+	pthread_t		thread_id;	
+	struct s_data			*data;
+}		t_philo;
+
 typedef struct s_data
 {
 	size_t				num_of_philos;
@@ -44,16 +55,6 @@ typedef struct s_data
 	t_philo			*philo;
 }				t_data;
 
-typedef struct s_philo
-{
-	size_t			philo_id; // vulgo number
-	size_t			last_eat;
-	size_t			eat_count;
-	char			keep_eat;
-	char			ate;
-	pthread_t		thread_id;
-	t_data			*data;
-}		t_philo;
 
 char	init_all(t_data *data, char **av, int ac);
 void			clean_free(t_data *data);
@@ -61,6 +62,8 @@ unsigned int	get_time(void);
 void			sleep_time(long long delay);
 void			*routine_philo(void *p);
 void			*ft_die(void *philo);
+long		ft_my_atoi(const char *str);
+//static void	other_fork(t_philo *p);
 
 /*int		philo(t_data *global);
 void	init_philo(t_data *global, t_philo **philo);

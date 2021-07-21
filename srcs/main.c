@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:34:35 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/20 21:24:54 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/21 11:13:59 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int ac, char **av)
 
 	if (ac < 5 || ac > 6)
 		printf(RED"Error, wrong arguments!\n");
-	if (!init_all(&global, av, ac));
+	if (!init_all(&global, av, ac))
 	{
 		clean_free(&global);
 		printf(RED"We can't start , init error or memory leaks!\n");

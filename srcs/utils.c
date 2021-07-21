@@ -6,41 +6,44 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:25:27 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/20 21:48:59 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/21 11:48:19 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_isspace(char c)
+/*int	ft_isspace(char c)
 {
 	if (c == '\t' || c == '\n' || c == '\v'
 		|| c == '\f' || c == '\r' || c == ' ')
 		return (1);
 	return (0);
-}
+}*/
 
-int	ft_my_atoi(const char *str)
+long	ft_my_atoi(const char *str)
 {
-	int	holder;
-	int	sign;
+	long	count;
+	long	neg;
+	long	ret;
 
-	holder = 0;
-	sign = 1;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	if (*str == '+' || *str == '-')
+	count = 0;
+	neg = 1;
+	ret = 0;
+	while (str[count] == '\f' || str[count] == '\t' || str[count] == '\n'
+		|| str[count] == '\r' || str[count] == '\v' || str[count] == ' ')
+		count++;
+	if (str[count] == '-' || str[count] == '+')
 	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
+		if (str[count] == '-')
+			neg *= -1;
+		count++;
 	}
-	while (*str >= '0' && *str <= '9')
+	while (str[count] >= '0' && str[count] <= '9')
 	{
-		holder = holder * 10 + *str - '0';
-		str++;
+		ret = (ret * 10) + (str[count] - 48);
+		count++;
 	}
-	return (holder * sign);
+	return (ret * neg);
 }
 
 /*{
@@ -75,7 +78,7 @@ unsigned int	get_time(void)
 {
 	struct timeval	time;
 
-	if (gettimeofday(&time, NULL));
+	if (gettimeofday(&time, NULL))
 		return (0);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }

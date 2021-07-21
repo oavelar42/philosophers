@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:58:13 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/20 22:34:59 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/21 11:56:42 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static void	time_die(t_data *p, size_t *count)
 {
 	pthread_mutex_lock(&(p->locked));
-	if (!p->some_died && !p->philo[*count].ate && !p->philo[*count].last_eat
+	if (!p->some_died && !p->philo[*count].ate && !p->philo[*count].must_eat
 			&& (get_time() - p->philo[*count].last_eat) >=p->time_to_die)
 	{
-		printf(RED"[%ld] Philosopher's %d died\n", get_time()
-				- p->base_time, p->num_of_philos);
+		//printf(RED"[%ld] Philosopher's died\n", get_time()
+		//	- p->init_time);
 		p->some_died = 1;
 		pthread_mutex_unlock(&(p->locked));
 		pthread_mutex_unlock(&(p->die));

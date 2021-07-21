@@ -6,13 +6,13 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:49:41 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/20 16:56:34 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/21 11:53:04 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	take_fork(t_philo *p, int left, int right, int p_num)
+/*void	take_fork(t_philo *p, int left, int right, int p_num)
 {
 	pthread_mutex_lock(&p->data->mutex_id[left]);
 	pthread_mutex_lock(&p->data->mutex_id[right]);
@@ -20,13 +20,16 @@ void	take_fork(t_philo *p, int left, int right, int p_num)
 	p->data->fork[right] = p_num;
 	if (p->data->fork)
 		printf(MAG"[%ld] Philosopher's %d has taken a fork\n", get_time()
-			- p->data->base_time, p->number + 1);
+			- p->data->init_time, p->philo_id + 1);
 }
 
-void	other_fork(t_philo *p, int right_f, int left_f)
+static void	other_fork(t_philo *p)
 {
-	p->data->fork[right_f] = -1;
-	p->data->fork[left_f] = -1;
-	pthread_mutex_unlock(&p->data->mutex_id[right_f]);
-	pthread_mutex_unlock(&p->data->mutex_id[left_f]);
+	pthread_mutex_unlock(&(p->data->fork[p->philo_id]));
+	pthread_mutex_unlock(&p->data->fork[(p->philo_id + 1) % p->data->num_of_philos]);
+	p->ate = 0;
+	printf(MAG"[%ld] Philosopher's is sleeping\n", get_time()
+			- p->data->num_of_philos);
+	usleep(200);
 }
+*/
