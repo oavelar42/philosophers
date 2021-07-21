@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 18:59:06 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/21 12:14:44 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/21 14:35:36 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,21 @@ static void	philo_fork(t_philo *p)
 	printf(MAG"[%ld] Philosopher's %lu has taken a fork\n", get_time() - p->data->init_time, p->philo_id + 1);
 	if (p->data->num_of_philos == 1)
 	{
-		sleep(200);
+		sleep_time(p->data->time_to_eat);
 		pthread_mutex_unlock(&(p->data->fork[p->philo_id]));
 		pthread_exit(0);
 	}
 	pthread_mutex_lock(&(p->data->fork[forks]));
 	printf(MAG"[%ld] Philosopher's %lu has taken a fork\n", get_time() - p->data->init_time, p->philo_id + 1);
+}
 
-	/*if (p->number % 2 == 1)
-		usleep(300);
-	take_fork(p, p->left_fork, p->right_fork, p->number);
-	if (p->data->fork)
-		printf(MAG"[%ld] Philosopher's %d has taken a fork\n", get_time()
-			- p->data->base_time, p->number + 1);*/
+static void	other_fork(t_philo *p)
+{
+	pthread_mutex_unlock(&(p->data->fork[p->philo_id]));
+	pthread_mutex_unlock(&p->data->fork[(p->philo_id + 1) % p->data->num_of_philos]);
+	p->ate = 0;
+	printf(MAG"[%ld] Philosopher's %lu is sleeping\n", get_time() - p->data->init_time, p->philo_id + 1);
+	sleep_time(p->data->time_to_sleep);
 }
 
 static void	philo_eat(t_philo *p)
@@ -52,48 +54,15 @@ static void	philo_eat(t_philo *p)
 		if (p->data->must_eat >= p->data->num_of_philos)
 		{
 			p->data->some_died = 1;
-			pthread_mutex_lock(&(p->data->write));
+			//pthread_mutex_lock(&(p->data->write));
 			printf("Philosophers satisfied!!!\n");
-			pthread_mutex_unlock(&(p->data->write));
+			//pthread_mutex_unlock(&(p->data->write));
 		}
 		pthread_mutex_unlock(&(p->data->locked));
 		pthread_exit(0);
 	}
 	pthread_mutex_unlock(&(p->data->locked));
-	usleep(200);
-}
-	/*if (p->data->fork[p->left_fork] == p->number
-		&& p->data->fork[p->right_fork] == p->number)
-	{
-		p->last_eat = get_time();
-		printf(YEL"[%ld] Philosopher's %d is eating\n", get_time()
-			- p->data->base_time, p->number + 1);
-		p->eat_cnt++;
-	}
 	sleep_time(p->data->time_to_eat);
-}
-
-void	philo_sleep(t_philo *p)
-{
-	printf(GRE"[%ld] Philosopher's %d is sleeping\n", get_time()
-		- p->data->base_time, p->number + 1);
-	other_fork(p, p->right_fork, p->left_fork);
-	sleep_time(p->data->time_to_sleep);
-}
-
-void	philo_think(t_philo *p)
-{
-	printf(BLU"[%ld] Philosopher's %d is thinking\n", get_time()
-		- p->data->base_time, p->number + 1);
-}*/
-
-static void	other_fork(t_philo *p)
-{
-	pthread_mutex_unlock(&(p->data->fork[p->philo_id]));
-	pthread_mutex_unlock(&p->data->fork[(p->philo_id + 1) % p->data->num_of_philos]);
-	p->ate = 0;
-	printf(GRE"[%ld] Philosopher's %lu is sleeping\n",  get_time() - p->data->init_time, p->philo_id + 1);
-	usleep(200);
 }
 
 void	*routine_philo(void *p)
@@ -102,7 +71,7 @@ void	*routine_philo(void *p)
 
 	philo = (t_philo *)p;
 	if (philo->philo_id % 2)
-		usleep(200);
+		sleep_time(philo->data->time_to_eat);
 	while (1)
 	{
 		philo_fork(philo);

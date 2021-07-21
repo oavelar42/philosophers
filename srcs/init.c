@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:36:31 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/21 11:48:01 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/21 14:38:38 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char init_philo(t_data *p)
 	return (1);
 }
 
-static char set_arg(size_t *get, char **av, int count)
+static char set_arg(size_t *get, char const **av, int count)
 {
 	int len;
 
@@ -67,7 +67,7 @@ static char set_arg(size_t *get, char **av, int count)
 	return (1);
 }
 
-static char init_args(t_data *data, char **av, int ac)
+static char init_args(t_data *data, char const **av, int ac)
 {
 	if (!set_arg(&(data->num_of_philos), av, 1))
 		return (0);
@@ -90,7 +90,7 @@ static char init_args(t_data *data, char **av, int ac)
 	return (1);
 }
 
-char	init_all(t_data *data, char **av, int ac)
+char	init_all(t_data *data, char const **av, int ac)
 {
 	data->philo = NULL;
 	if (!init_args(data, av, ac))
