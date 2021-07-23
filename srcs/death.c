@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:58:13 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/21 16:40:12 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/23 16:02:06 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	time_die(t_data *p, size_t *count)
 	{
 		msg_die(p->philo);
 		p->some_died = 1;
+		if (p->time_to_die)
+			exit(EXIT_SUCCESS);
 		pthread_mutex_unlock(&(p->locked));
 		pthread_mutex_unlock(&(p->die));
 		pthread_exit(0);

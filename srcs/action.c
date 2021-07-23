@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 18:59:06 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/21 17:34:42 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/23 16:51:34 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	philo_fork(t_philo *p)
 
 	f = (p->philo_id + 1) % p->data->num_of_philos;
 	pthread_mutex_lock(&(p->data->forks[p->philo_id]));
-	printf(MAG"[%ld] Philosopher's %lu has taken a fork\n", get_time()
+	printf(MAG"[%ld] Philosopher's %lu has taken a right fork\n", get_time()
 		- p->data->init_time, p->philo_id + 1);
 	if (p->data->num_of_philos == 1)
 	{
@@ -27,8 +27,9 @@ static void	philo_fork(t_philo *p)
 		pthread_exit(0);
 	}
 	pthread_mutex_lock(&(p->data->forks[f]));
-	printf(MAG"[%ld] Philosopher's %lu has taken a fork\n", get_time()
+	printf(MAG"[%ld] Philosopher's %lu has taken a left fork\n", get_time()
 		- p->data->init_time, p->philo_id + 1);
+	pthread_mutex_unlock(&(p->data->locked));
 }
 
 static void	other_fork(t_philo *p)
