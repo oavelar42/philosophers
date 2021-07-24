@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 11:34:35 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/21 17:30:43 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/24 14:33:44 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int	main(int ac, char const **av)
 	if (!init_all(&global, av, ac))
 	{
 		clean_free(&global);
-		return (printf(RED"We can't start , init error or negative number!\n"));
+		return (printf(RED"We can't start, init error or negative number!\n"));
 	}
 	if (!philo(&global))
 	{
 		clean_free(&global);
-		return (printf(RED"Error , threads error!\n"));
+		return (printf(RED"Error, threads error!\n"));
 	}
 	pthread_mutex_lock(&(global.die));
 	pthread_mutex_unlock(&(global.die));

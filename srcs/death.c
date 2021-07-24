@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 16:58:13 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/23 16:02:06 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/24 14:27:17 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static void	time_die(t_data *p, size_t *count)
 	if (!p->some_died && !p->philo[*count].ate && !p->philo[*count].must_eat
 		&& (get_time() - p->philo[*count].last_eat) >= p->time_to_die)
 	{
+		pthread_mutex_unlock(&(p->die));
 		msg_die(p->philo);
-		p->some_died = 1;
 		if (p->time_to_die)
 			exit(EXIT_SUCCESS);
+		p->some_died = 1;
 		pthread_mutex_unlock(&(p->locked));
-		pthread_mutex_unlock(&(p->die));
 		pthread_exit(0);
 	}
 	if (p->some_died)

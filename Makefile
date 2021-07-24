@@ -6,7 +6,7 @@
 #    By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/21 11:12:25 by oavelar           #+#    #+#              #
-#    Updated: 2021/07/21 15:15:15 by oavelar          ###   ########.fr        #
+#    Updated: 2021/07/24 14:37:32 by oavelar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,27 +24,25 @@ SRCS		= $(shell find $(SRCS_DIR) -type f -name "*.c")
 
 OBJS		= $(SRCS:.c=.o)
 
-_COLOR		= \033[32m
-_BOLDCOLOR	= \033[32;1m
-_CLEAR		= \033[0K\r\c
-_OK			= [\033[32mOK\033[0m]
-_RED		= \033[1;31m
-_OFF		= \033[0m
+CLEAR		= \033[0K\r\c
+OK			= [\033[32mOK\033[0m]
+RED			= \033[1;31m
+OFF			= \033[0m
 
 %.o			: %.c
 			@echo "[..] $(NAME_SHORT)... compiling $*.c\r\c"
 			@$(CC) $(MAIN_INC) -c $< -o $@
-			@echo "$(_CLEAR)"
+			@echo "$(CLEAR)"
 
 all			: $(NAME)
 
-$(NAME)		: $(OBJS) $(OBJS_UTILS) $(INCS)
+$(NAME)		: $(OBJS) $(INCS)
 			@$(CC) $(OBJS) $(MAIN_INC) -o $(NAME)
-			@echo "$(_OK) $(NAME_SHORT) compiled"
+			@echo "$(OK) $(NAME_SHORT) compiled"
 
 clean		:
 			@$(RM) $(OBJS)
-			@echo "${_RED}...Removing object files...${_OFF}"
+			@echo "${RED}...Removing object files...${OFF}"
 
 fclean		: clean
 			@$(RM) $(NAME)
