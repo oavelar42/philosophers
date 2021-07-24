@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 18:59:06 by oavelar           #+#    #+#             */
-/*   Updated: 2021/07/24 14:37:34 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/07/24 14:43:06 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	*routine_philo(void *p)
 		other_fork(philo);
 		printf(BLU"[%ld] Philosopher's %lu is thinking\n", get_time()
 			- philo->data->init_time, philo->philo_id + 1);
-		//pthread_mutex_unlock(&(philo->data->locked));
 		if (philo->data->some_died)
 			pthread_exit(0);
 	}
